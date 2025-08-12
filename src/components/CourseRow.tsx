@@ -1,7 +1,7 @@
 // src/components/CourseRow.tsx
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react'; // useEffectを削除
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
@@ -18,25 +18,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-// 型定義
-type Course = {
-  id: string;
-  projectId: string;
-  title: string;
-  description: string;
-}
-
-type Schedule = {
-  id: string;
-  dateTime: { toDate: () => Date; };
-  capacities: Record<string, number>;
-}
-    
-type CourseRowProps = {
-  course: Course;
-  onEdit: () => void; // 編集ボタンが押されたことを親に通知
-  onDelete: () => void; // 削除ボタンが押されたことを親に通知
-}
+// (型定義は変更なし)
+type Course = { id: string; projectId: string; title: string; description: string; }
+type Schedule = { id: string; dateTime: { toDate: () => Date; }; capacities: Record<string, number>; }
+type CourseRowProps = { course: Course; onEdit: () => void; onDelete: () => void; }
 
 export default function CourseRow({ course, onEdit, onDelete }: CourseRowProps) {
   const [isOpen, setIsOpen] = useState(false);
