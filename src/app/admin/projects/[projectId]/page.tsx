@@ -1,13 +1,12 @@
 import ProjectAdminView from "@/components/ProjectAdminView";
 
-// Next.jsが期待する正しい型定義
-type PageProps = {
-  params: { projectId: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export default function ProjectAdminPage({ params }: PageProps) {
+// このページはサーバーコンポーネントなのでasyncにする
+export default async function ProjectAdminPage({ params }: { params: { projectId: string } }) {
   
-  return <ProjectAdminView projectId={params.projectId} />;
+  // paramsからprojectIdを安全に取り出す
+  const { projectId } = params;
+
+  // 取り出したprojectIdをクライアントコンポーネントに渡す
+  return <ProjectAdminView projectId={projectId} />;
 
 }
